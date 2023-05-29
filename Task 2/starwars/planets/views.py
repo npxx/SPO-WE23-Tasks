@@ -11,10 +11,30 @@ def data(request):
 
     if response.status_code == 200:
         data = response.json()
-        return JsonResponse(data)
+
+        residents = []
+        for resident_url in data['residents']:
+            resident_response = requests.get(resident_url)
+            if resident_response.status_code == 200:
+                resident_data = resident_response.json()
+                residents.append(resident_data['name'])
+
+        films = []
+        for film_url in data['films']:
+            film_response = requests.get(film_url)
+            if film_response.status_code == 200:
+                film_data = film_response.json()
+                films.append(film_data['title'])
+
+        del data['residents']
+        del data['films']
+        return render(request, 'table.html', {'data': data, 'residents': residents, 'films': films})
     else:
-        return JsonResponse({'message': 'Failed to fetch data'}, status=500)
+        return render(request, 'table.html', {'data': None,'residents': None})
 
 
 def req(request):
     return render(request, 'req.html')
+
+def table(request):
+    return render(request, 'table.html')

@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('data/', views.data, name='data'),
     path('', views.req, name='req'),
+    path('table/', views.table, name='table'),
 ]

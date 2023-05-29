@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Table</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+        color: #333;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #eaeaea;
+      }
+
+      td {
+        border-bottom: 1px solid #ddd;
+      }
+    </style>
+  </head>
+  <body>
+    {% if data %}
+    <table>
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, value in data.items %}
+        <tr>
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td>Residents</td>
+          <td>
+            {% if residents %} {% for resident in residents %} {{ resident }}<br />
+            {% endfor %} {% else %} No residents found. {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <td>Films</td>
+          <td>
+            {% if films %} {% for film in films %} {{ film }}<br />
+            {% endfor %} {% else %} No films found. {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    {% else %}
+    <p>No data available.</p>
+    {% endif %}
+  </body>
+</html>
