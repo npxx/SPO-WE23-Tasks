@@ -62,3 +62,18 @@ body {
 .allboxes:hover {
   opacity: 1;
 }
+
+@media (max-width: 600px) {
+  .container {
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .allboxes {
+    grid-column: auto;
+  }
+
+  .allboxes:hover {
+    opacity: 1;
+  }
+}
