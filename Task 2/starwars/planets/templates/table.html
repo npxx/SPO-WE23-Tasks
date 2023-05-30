@@ -31,6 +31,19 @@
       td {
         border-bottom: 1px solid #ddd;
       }
+
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        margin-right: 10px;
+      }
+      .button:hover {
+        background-color: #555;
+      }
     </style>
   </head>
   <body>
@@ -68,5 +81,6 @@
     {% else %}
     <p>No data available.</p>
     {% endif %}
+    <a href="{% url 'data' %}"><button class="button">Reload</button></a
   </body>
 </html>

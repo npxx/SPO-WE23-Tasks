@@ -1,0 +1,39 @@
+<!-- HTML template (table.html) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Table</title>
+  </head>
+  <body>
+    <table>
+      <tbody id="data-container"></tbody>
+    </table>
+    <script>
+      function fetchAndCacheHTML() {
+        var cachedHTML = localStorage.getItem("cachedHTML");
+
+        if (cachedHTML) {
+          document.getElementById("data-container").innerHTML = cachedHTML;
+        } else {
+          fetch("/data/", {
+            headers: {
+              "Cache-Control": "max-age=600",
+            },
+          })
+            .then(function (response) {
+              return response.text();
+            })
+            .then(function (data) {
+              localStorage.setItem("cachedHTML", data);
+              document.getElementById("data-container").innerHTML = data;
+            })
+            .catch(function (error) {
+              console.log("Error:", error);
+            });
+        }
+      }
+
+      fetchAndCacheHTML();
+    </script>
+  </body>
+</html>
