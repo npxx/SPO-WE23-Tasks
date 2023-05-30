@@ -17,7 +17,7 @@
         } else {
           fetch("/data/", {
             headers: {
-              "Cache-Control": "max-age=600",
+              "Cache-Control": "max-age=20",
             },
           })
             .then(function (response) {
@@ -26,6 +26,10 @@
             .then(function (data) {
               localStorage.setItem("cachedHTML", data);
               document.getElementById("data-container").innerHTML = data;
+
+              setTimeout(function () {
+                localStorage.removeItem("cachedHTML");
+              }, 20 * 1000);
             })
             .catch(function (error) {
               console.log("Error:", error);

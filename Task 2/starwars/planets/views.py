@@ -2,13 +2,12 @@ from django.shortcuts import render
 
 # Create your views here.
 import requests
-from django.http import JsonResponse
 
-from django.views.decorators.cache import cache_page
-# from django.http import HttpResponse
-# from django.template.loader import render_to_string
+# from django.views.decorators.cache import cache_page
+from django.http import HttpResponse
+from django.template.loader import render_to_string
 
-@cache_page(15)
+# @cache_page(15)
 def data(request):
     url = 'https://swapi.dev/api/planets/1/'
 
@@ -33,11 +32,11 @@ def data(request):
 
         del data['residents']
         del data['films']
-        # html = render_to_string('table.html', {'data': data, 'residents': residents, 'films': films})  
-        # response = HttpResponse(html, content_type='text/html')
-        # response['Cache-Control'] = 'public, max-age=600'  
-        # return response
-        return render(request, 'table.html', {'data': data, 'residents': residents, 'films': films})
+        html = render_to_string('table.html', {'data': data, 'residents': residents, 'films': films})  
+        response = HttpResponse(html, content_type='text/html')
+        response['Cache-Control'] = 'public, max-age=20'  
+        return response
+        # return render(request, 'table.html', {'data': data, 'residents': residents, 'films': films})
     else:
         return render(request, 'table.html', {'data': None,'residents': None})
 
@@ -45,8 +44,8 @@ def data(request):
 def req(request):
     return render(request, 'req.html')
 
-# def cached(request):
-#     return render(request, 'cached.html')
+def cached(request):
+    return render(request, 'cached.html')
 
 def table(request):
     return render(request, 'table.html')

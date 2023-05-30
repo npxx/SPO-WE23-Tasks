@@ -24,5 +24,5 @@ urlpatterns = [
     path('data/', views.data, name='data'),
     path('', views.req, name='req'),
     path('table/', views.table, name='table'),
-    # path('cached/', views.cached, name='cached'),
+    path('cached/', views.cached, name='cached'),
 ]
